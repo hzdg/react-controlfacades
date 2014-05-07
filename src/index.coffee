@@ -1,5 +1,7 @@
 # react-controlfacades
 # =================
 
+CFCheckbox = require './CFCheckbox'
 
-module.exports = {}
+
+module.exports = {CFCheckbox}
