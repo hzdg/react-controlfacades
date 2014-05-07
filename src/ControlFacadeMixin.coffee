@@ -7,13 +7,13 @@ merge = require 'react/lib/merge'
 
 ControlFacadeMixin =
   propTypes:
-    # Most of the props are simply forwarded to the control. These two let you
-    # control the wrapper.
-    wrapper: PropTypes.func
-    wrapperProps: PropTypes.object
-
-    # This one lets you specify a component class to use for the control.
+    # Most of the props are simply forwarded to the wrapper. These two let you
+    # give you more control over the input.
     control: PropTypes.func
+    controlProps: PropTypes.object
+
+    # This one lets you specify a component class to use for the wrapper.
+    wrapper: PropTypes.func
 
     # This one is for the facade. It'll be passed props (checked, selected,
     # value) so you can render appropriately.
@@ -22,8 +22,8 @@ ControlFacadeMixin =
     wrapper: span
   getInitialState: -> {}
   _render: ->
-    wrapperProps = merge @props?.wrapperProps,
-      style: merge @props?.wrapperProps?.style,
+    wrapperProps = merge @_getWrapperProps(),
+      style: merge @props.style,
         display: 'inline-block'
         position: 'relative'
     (@props.wrapper wrapperProps,
@@ -34,11 +34,24 @@ ControlFacadeMixin =
       )
       (@props.control @_getControlProps(), @props.children)
     )
-  _getControlProps: ->
-    # Remove the wrapper-specific props.
+  _getWrapperProps: ->
     props = merge @props
-    delete props.wrapper
-    delete props.wrapperProps
+    delete props.controlProps
+    delete props.checked
+    delete props.defaultChecked
+    delete props.selected
+    delete props.defaultSelected
+    delete props.value
+    delete props.defaultValue
+    props
+  _getControlProps: ->
+    props = merge @props.controlProps,
+      checked: @props.checked
+      defaultChecked: @props.defaultChecked
+      selected: @props.selected
+      defaultSelected: @props.defaultSelected
+      value: @props.value
+      defaultValue: @props.defaultValue
 
     props.style = merge props.style,
       display: 'block'

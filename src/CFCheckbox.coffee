@@ -12,8 +12,9 @@ module.exports = me =
     displayName: 'CFCheckbox'
     getDefaultProps: ->
       control: input
-      type: 'checkbox'
-    render: ControlFacadeMixin._render
     getControlProps: (props) ->
-      if props.checked? then props
-      else merge props, checkedLink: @linkState 'checked'
+      props = merge props
+      props.type = 'checkbox'
+      props.checkedLink = @linkState 'checked' unless @props.checked?
+      props
+    render: ControlFacadeMixin._render
