@@ -41,7 +41,7 @@ var MyCustomCheckbox = React.createClass({
         };
 
         return (
-          <div style={ style } />
+            <div style={ style } />
         );
     }
 });
