@@ -3,7 +3,7 @@ react-controlfacades
 
 This project gives you a way to easily customize control "facades"—what's
 presented to a user—while keeping the native browser functionality. For example,
-you can provide a custom component for display a `<select>`, but interacting
+you can provide a custom component for displaying a `<select>`, but interacting
 with it will trigger the browser's dropdown, wheel (iOS), or other
 browser-appropriate view. It works by overlaying the original control with an
 opacity of 0 on top of your custom component.
