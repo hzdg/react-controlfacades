@@ -16,20 +16,18 @@ module.exports = me = React.createClass({
   displayName: 'CFCheckbox',
   getDefaultProps: function() {
     return {
-      control: input,
-      type: 'checkbox'
+      control: input
     };
   },
-  render: ControlFacadeMixin._render,
   getControlProps: function(props) {
-    if (props.checked != null) {
-      return props;
-    } else {
-      return merge(props, {
-        checkedLink: this.linkState('checked')
-      });
+    props = merge(props);
+    props.type = 'checkbox';
+    if (this.props.checked == null) {
+      props.checkedLink = this.linkState('checked');
     }
-  }
+    return props;
+  },
+  render: ControlFacadeMixin._render
 });
 
 },{"./ControlFacadeMixin":2}],2:[function(_dereq_,module,exports){
@@ -45,9 +43,9 @@ _ref = React.DOM, div = _ref.div, span = _ref.span, input = _ref.input;
 
 ControlFacadeMixin = {
   propTypes: {
-    wrapper: PropTypes.func,
-    wrapperProps: PropTypes.object,
     control: PropTypes.func,
+    controlProps: PropTypes.object,
+    wrapper: PropTypes.func,
     facade: PropTypes.func
   },
   getDefaultProps: function() {
@@ -59,24 +57,41 @@ ControlFacadeMixin = {
     return {};
   },
   _render: function() {
-    var wrapperProps, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
-    wrapperProps = merge((_ref1 = this.props) != null ? _ref1.wrapperProps : void 0, {
-      style: merge((_ref2 = this.props) != null ? (_ref3 = _ref2.wrapperProps) != null ? _ref3.style : void 0 : void 0, {
+    var wrapperProps, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6;
+    wrapperProps = merge(this._getWrapperProps(), {
+      style: merge(this.props.style, {
         display: 'inline-block',
         position: 'relative'
       })
     });
     return this.props.wrapper(wrapperProps, this.props.facade({
-      checked: (_ref4 = (_ref5 = this.props.checked) != null ? _ref5 : this.state.checked) != null ? _ref4 : this.props.defaultChecked,
-      selected: (_ref6 = (_ref7 = this.props.selected) != null ? _ref7 : this.state.selected) != null ? _ref6 : this.props.defaultSelected,
-      value: (_ref8 = (_ref9 = this.props.value) != null ? _ref9 : this.state.value) != null ? _ref8 : this.props.defaultValue
+      checked: (_ref1 = (_ref2 = this.props.checked) != null ? _ref2 : this.state.checked) != null ? _ref1 : this.props.defaultChecked,
+      selected: (_ref3 = (_ref4 = this.props.selected) != null ? _ref4 : this.state.selected) != null ? _ref3 : this.props.defaultSelected,
+      value: (_ref5 = (_ref6 = this.props.value) != null ? _ref6 : this.state.value) != null ? _ref5 : this.props.defaultValue
     }), this.props.control(this._getControlProps(), this.props.children));
+  },
+  _getWrapperProps: function() {
+    var props;
+    props = merge(this.props);
+    delete props.controlProps;
+    delete props.checked;
+    delete props.defaultChecked;
+    delete props.selected;
+    delete props.defaultSelected;
+    delete props.value;
+    delete props.defaultValue;
+    return props;
   },
   _getControlProps: function() {
     var props;
-    props = merge(this.props);
-    delete props.wrapper;
-    delete props.wrapperProps;
+    props = merge(this.props.controlProps, {
+      checked: this.props.checked,
+      defaultChecked: this.props.defaultChecked,
+      selected: this.props.selected,
+      defaultSelected: this.props.defaultSelected,
+      value: this.props.value,
+      defaultValue: this.props.defaultValue
+    });
     props.style = merge(props.style, {
       display: 'block',
       position: 'absolute',
