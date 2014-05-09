@@ -37,7 +37,7 @@ var MyCustomCheckbox = React.createClass({
             width: '30px',
             height: '30px',
             border: '2px solid black',
-            backgroundColor: props.isChecked ? 'black': 'white'
+            backgroundColor: props.checked ? 'black': 'white'
         };
 
         return (
