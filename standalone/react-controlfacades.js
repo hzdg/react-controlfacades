@@ -30,7 +30,38 @@ module.exports = me = React.createClass({
   render: ControlFacadeMixin._render
 });
 
-},{"./ControlFacadeMixin":2}],2:[function(_dereq_,module,exports){
+},{"./ControlFacadeMixin":3}],2:[function(_dereq_,module,exports){
+var ControlFacadeMixin, LinkedStateMixin, React, me, merge, select;
+
+React = (window.React);
+
+LinkedStateMixin = (window.React.addons.LinkedStateMixin);
+
+merge = (window.React.addons.merge);
+
+ControlFacadeMixin = _dereq_('./ControlFacadeMixin');
+
+select = React.DOM.select;
+
+module.exports = me = React.createClass({
+  mixins: [LinkedStateMixin, ControlFacadeMixin],
+  displayName: 'CFSelect',
+  getDefaultProps: function() {
+    return {
+      control: select
+    };
+  },
+  getControlProps: function(props) {
+    props = merge(props);
+    if (this.props.value == null) {
+      props.valueLink = this.linkState('value');
+    }
+    return props;
+  },
+  render: ControlFacadeMixin._render
+});
+
+},{"./ControlFacadeMixin":3}],3:[function(_dereq_,module,exports){
 var ControlFacadeMixin, PropTypes, React, div, input, merge, span, _ref;
 
 React = (window.React);
@@ -57,18 +88,32 @@ ControlFacadeMixin = {
     return {};
   },
   _render: function() {
-    var wrapperProps, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6;
+    var value, wrapperProps, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6;
     wrapperProps = merge(this._getWrapperProps(), {
       style: merge(this.props.style, {
         display: 'inline-block',
         position: 'relative'
       })
     });
+    value = (_ref1 = (_ref2 = this.props.value) != null ? _ref2 : this.state.value) != null ? _ref1 : this.props.defaultValue;
     return this.props.wrapper(wrapperProps, this.props.facade({
-      checked: (_ref1 = (_ref2 = this.props.checked) != null ? _ref2 : this.state.checked) != null ? _ref1 : this.props.defaultChecked,
-      selected: (_ref3 = (_ref4 = this.props.selected) != null ? _ref4 : this.state.selected) != null ? _ref3 : this.props.defaultSelected,
-      value: (_ref5 = (_ref6 = this.props.value) != null ? _ref6 : this.state.value) != null ? _ref5 : this.props.defaultValue
+      checked: (_ref3 = (_ref4 = this.props.checked) != null ? _ref4 : this.state.checked) != null ? _ref3 : this.props.defaultChecked,
+      selected: (_ref5 = (_ref6 = this.props.selected) != null ? _ref6 : this.state.selected) != null ? _ref5 : this.props.defaultSelected,
+      value: value,
+      label: this.getLabel(value)
     }), this.props.control(this._getControlProps(), this.props.children));
+  },
+  getLabel: function(value) {
+    var child, _i, _len, _ref1, _ref2;
+    if (this.props.children) {
+      _ref1 = this.props.children;
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        child = _ref1[_i];
+        if (child.props.value === value) {
+          return (_ref2 = child.props.children) != null ? _ref2.toString() : void 0;
+        }
+      }
+    }
   },
   _getWrapperProps: function() {
     var props;
@@ -108,15 +153,18 @@ ControlFacadeMixin = {
 
 module.exports = ControlFacadeMixin;
 
-},{}],3:[function(_dereq_,module,exports){
-var CFCheckbox;
+},{}],4:[function(_dereq_,module,exports){
+var CFCheckbox, CFSelect;
 
 CFCheckbox = _dereq_('./CFCheckbox');
 
+CFSelect = _dereq_('./CFSelect');
+
 module.exports = {
-  CFCheckbox: CFCheckbox
+  CFCheckbox: CFCheckbox,
+  CFSelect: CFSelect
 };
 
-},{"./CFCheckbox":1}]},{},[3])
-(3)
+},{"./CFCheckbox":1,"./CFSelect":2}]},{},[4])
+(4)
 });
