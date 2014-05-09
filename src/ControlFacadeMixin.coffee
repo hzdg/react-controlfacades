@@ -26,14 +26,21 @@ ControlFacadeMixin =
       style: merge @props.style,
         display: 'inline-block'
         position: 'relative'
+    value = @props.value ? @state.value ? @props.defaultValue
     (@props.wrapper wrapperProps,
       (@props.facade
         checked: @props.checked ? @state.checked ? @props.defaultChecked
         selected: @props.selected ? @state.selected ? @props.defaultSelected
-        value: @props.value ? @state.value ? @props.defaultValue
+        value: value
+        label: @getLabel value
       )
       (@props.control @_getControlProps(), @props.children)
     )
+  getLabel: (value) ->
+    if @props.children
+      for child in @props.children
+        if child.props.value is value
+          return child.props.children?.toString()
   _getWrapperProps: ->
     props = merge @props
     delete props.controlProps

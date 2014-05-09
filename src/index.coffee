@@ -2,6 +2,7 @@
 # ====================
 
 CFCheckbox = require './CFCheckbox'
+CFSelect = require './CFSelect'
 
 
-module.exports = {CFCheckbox}
+module.exports = {CFCheckbox, CFSelect}
