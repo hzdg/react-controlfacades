@@ -47,5 +47,25 @@ var MyCustomCheckbox = React.createClass({
 });
 ```
 
+The facade will recieve the following props:
+
+<table>
+    <tr>
+        <td><code>checked</code></td>
+        <td>For checkboxes, indicates whether the box is checked or not.</td>
+    </tr>
+    <tr>
+        <td><code>value</code></td>
+        <td>The value of the control.</td>
+    </tr>
+    <tr>
+        <td><code>label</code></td>
+        <td>
+            For select boxes, the option string that corresponds to the selected
+            value.
+        </td>
+    </tr>
+</table>
+
 
 [jquery.icbiacontrol]: https://github.com/matthewwithanm/jquery-icbiacontrol
