@@ -90,10 +90,10 @@ ControlFacadeMixin = {
   _render: function() {
     var value, wrapperProps, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6;
     wrapperProps = merge(this._getWrapperProps(), {
-      style: merge(this.props.style, {
+      style: merge({
         display: 'inline-block',
         position: 'relative'
-      })
+      }, this.props.style)
     });
     value = (_ref1 = (_ref2 = this.props.value) != null ? _ref2 : this.state.value) != null ? _ref1 : this.props.defaultValue;
     return this.props.wrapper(wrapperProps, this.props.facade({

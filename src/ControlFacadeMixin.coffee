@@ -23,9 +23,10 @@ ControlFacadeMixin =
   getInitialState: -> {}
   _render: ->
     wrapperProps = merge @_getWrapperProps(),
-      style: merge @props.style,
+      style: merge
         display: 'inline-block'
         position: 'relative'
+        @props.style
     value = @props.value ? @state.value ? @props.defaultValue
     (@props.wrapper wrapperProps,
       (@props.facade
