@@ -1,5 +1,5 @@
 React = require 'react'
-merge = require 'react/lib/merge'
+extend = require 'xtend'
 
 {PropTypes} = React
 {div, span, input} = React.DOM
@@ -22,8 +22,8 @@ ControlFacadeMixin =
     wrapper: span
   getInitialState: -> {}
   _render: ->
-    wrapperProps = merge @_getWrapperProps(),
-      style: merge
+    wrapperProps = extend @_getWrapperProps(),
+      style: extend
         display: 'inline-block'
         position: 'relative'
         @props.style
@@ -43,7 +43,7 @@ ControlFacadeMixin =
         if child.props.value is value
           return child.props.children?.toString()
   _getWrapperProps: ->
-    props = merge @props
+    props = extend @props
     delete props.controlProps
     delete props.checked
     delete props.defaultChecked
@@ -53,7 +53,7 @@ ControlFacadeMixin =
     delete props.defaultValue
     props
   _getControlProps: ->
-    props = merge @props.controlProps,
+    props = extend @props.controlProps,
       checked: @props.checked
       defaultChecked: @props.defaultChecked
       selected: @props.selected
@@ -61,7 +61,7 @@ ControlFacadeMixin =
       value: @props.value
       defaultValue: @props.defaultValue
 
-    props.style = merge props.style,
+    props.style = extend props.style,
       display: 'block'
       position: 'absolute'
       opacity: '0'

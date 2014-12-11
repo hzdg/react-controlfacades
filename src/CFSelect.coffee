@@ -1,6 +1,6 @@
 React = require 'react'
 LinkedStateMixin = require 'react/lib/LinkedStateMixin'
-merge = require 'react/lib/merge'
+extend = require 'xtend'
 ControlFacadeMixin = require './ControlFacadeMixin'
 
 {select} = React.DOM
@@ -13,7 +13,7 @@ module.exports = me =
     getDefaultProps: ->
       control: select
     getControlProps: (props) ->
-      props = merge props
+      props = extend props
       props.valueLink = @linkState 'value' unless @props.value?
       props
     render: ControlFacadeMixin._render
