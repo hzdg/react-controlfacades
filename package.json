@@ -1,6 +1,6 @@
 {
   "name": "react-controlfacades",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Style form controls but use their default behavior",
   "main": "./lib/index.js",
   "directories": {
