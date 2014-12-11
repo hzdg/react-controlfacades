@@ -27,8 +27,8 @@ var MyCustomCheckbox = React.createClass({
         // Render the checkbox facade using the CFCheckbox as a controller. For
         // the sake of simplicity, we're just using a function to generate the
         // facade here, however, you could also pass a component constructor.
-        return this.transferPropsTo(
-            <CFCheckbox className="my-custom-checkbox" facade={ this.renderFacade } />
+        return (
+            <CFCheckbox {...this.props} className="my-custom-checkbox" facade={ this.renderFacade } />
         );
     },
     renderFacade: function (props, children) {
