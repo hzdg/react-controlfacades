@@ -1,5 +1,6 @@
 import React from 'react';
 import DecoratorCreator from './DecoratorCreator';
+import {CheckboxControl, SelectControl} from './controls';
 
 
 class DefaultWrapper extends React.Component {
