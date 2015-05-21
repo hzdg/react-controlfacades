@@ -18,53 +18,41 @@ Usage
 -----
 
 ```jsx
-var React = require('react');
-var CFCheckbox = require('react-controlfacades').CFCheckbox;
+import React from 'react';
+import {checkbox} from 'react-controlfacades';
 
-var MyCustomCheckbox = React.createClass({
-    displayName: 'MyCustomCheckbox',
-    render: function () {
-        // Render the checkbox facade using the CFCheckbox as a controller. For
-        // the sake of simplicity, we're just using a function to generate the
-        // facade here, however, you could also pass a component constructor.
-        return (
-            <CFCheckbox {...this.props} className="my-custom-checkbox" facade={ this.renderFacade } />
-        );
-    },
-    renderFacade: function (props, children) {
-        var style = {
-            display: 'inline-block',
-            width: '30px',
-            height: '30px',
-            border: '2px solid black',
-            backgroundColor: props.checked ? 'black': 'white'
-        };
+@checkbox()
+class MyCheckbox extends React.Component {
+  render() {
+    const style = {
+      display: 'inline-block',
+      width: '30px',
+      height: '30px',
+      border: '2px solid black',
+      backgroundColor: this.props.value ? 'black': 'white',
+    };
 
-        return (
-            <div style={ style } />
-        );
-    }
-});
+    return (
+      <div style={style}></div>
+    );
+  }
+}
 ```
 
-The facade will recieve the following props:
+The facade will receive the following props:
 
 <table>
-    <tr>
-        <td><code>checked</code></td>
-        <td>For checkboxes, indicates whether the box is checked or not.</td>
-    </tr>
-    <tr>
-        <td><code>value</code></td>
-        <td>The value of the control.</td>
-    </tr>
-    <tr>
-        <td><code>label</code></td>
-        <td>
-            For select boxes, the option string that corresponds to the selected
-            value.
-        </td>
-    </tr>
+  <tr>
+    <td><code>value</code></td>
+    <td>The value of the control.</td>
+  </tr>
+  <tr>
+    <td><code>label</code></td>
+    <td>
+      For select boxes, the option string that corresponds to the selected
+      value.
+    </td>
+  </tr>
 </table>
 
 
