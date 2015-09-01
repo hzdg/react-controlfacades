@@ -45,5 +45,8 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hzdg/react-controlfacades/issues"
+  },
+  "dependencies": {
+    "react-controllables": "^0.7.0"
   }
 }

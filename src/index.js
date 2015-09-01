@@ -1,6 +1,7 @@
 import React from 'react';
 import DecoratorCreator from './DecoratorCreator';
 import {CheckboxControl, SelectControl} from './controls';
+import controllable from 'react-controllables';
 
 
 class DefaultWrapper extends React.Component {
@@ -16,7 +17,7 @@ class DefaultWrapper extends React.Component {
 export const facade = DecoratorCreator({wrapper: DefaultWrapper})(function(Facade, options) {
   const {wrapper: Wrapper, control: Control} = options || {};
 
-  @controllable({value: 'onChange'})
+  @controllable(['value'])
   class WrappedControl extends React.Component {
     render() {
       // TODO: How to know which props go to facade vs control?
