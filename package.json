@@ -7,12 +7,12 @@
     "test": "test"
   },
   "devDependencies": {
-    "babel": "^5.4.5",
-    "babel-core": "^5.4.5",
-    "babel-eslint": "^3.1.6",
-    "babel-plugin-object-assign": "^1.1.0",
-    "babel-runtime": "^5.4.4",
     "eslint": "^0.21.2",
+    "babel": "^5.8.23",
+    "babel-core": "^5.8.23",
+    "babel-eslint": "^4.1.1",
+    "babel-plugin-object-assign": "^1.2.1",
+    "babel-runtime": "^5.8.20",
     "gulp": "~3.6.2",
     "gulp-babel": "^5.1.0",
     "gulp-bump": "~0.1.8",
