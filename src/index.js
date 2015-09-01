@@ -19,12 +19,35 @@ export const facade = DecoratorCreator({wrapper: DefaultWrapper})(function(Facad
 
   @controllable(['value'])
   class WrappedControl extends React.Component {
+
+    getLabel(value = this.props.value) {
+      if (this.props.children) {
+        let child = this.props.children.find(child => child.props.value === value);
+        if (child && child.props.children) return child.props.children.toString();
+      }
+      return value.toString();
+    }
+
+    renderFacade() {
+      // TODO: How to know which props go to facade?
+      return (
+        <Facade
+          {...this.props}
+          label={this.getLabel()}
+        />
+      );
+    }
+
+    renderControl() {
+      // TODO: How to know which props go to control?
+      return <Control {...this.props} />;
+    }
+
     render() {
-      // TODO: How to know which props go to facade vs control?
       return (
         <Wrapper>
-          <Facade {...this.props} />
-          <Control {...this.props} />
+          {this.renderFacade()}
+          {this.renderControl()}
         </Wrapper>
       );
     }
