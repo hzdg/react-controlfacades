@@ -29,6 +29,10 @@ export class CheckboxControl extends React.Component {
     defaultValue: false,
   }
 
+  handleChange(event) {
+    if (this.props.onChange) this.props.onChange(!!event.currentTarget.checked);
+  }
+
   render() {
     let props = Object.assign(this.props);
     delete props.checked;
@@ -45,9 +49,6 @@ export class CheckboxControl extends React.Component {
           />
     );
   }
-  handleChange(event) {
-    if (this.props.onChange) this.props.onChange(!!event.currentTarget.checked);
-  }
 }
 
 /**
@@ -55,14 +56,20 @@ export class CheckboxControl extends React.Component {
  * `defaultValue`, `onChange`).
  */
 export class SelectControl extends React.Component {
+  static propTypes = {
+    children: PropTypes.node,
+    onChange: PropTypes.func,
+  }
+
+  handleChange(event) {
+    if (this.props.onChange) this.props.onChange(event.currentTarget.value);
+  }
+
   render() {
     return (
       <select style={controlStyles} {...this.props} onChange={::this.handleChange}>
         {this.props.children}
       </select>
     );
-  }
-  handleChange(event) {
-    if (this.props.onChange) this.props.onChange(event.currentTarget.value);
   }
 }

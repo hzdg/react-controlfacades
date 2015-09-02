@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import DecoratorCreator from './DecoratorCreator';
 import {CheckboxControl, SelectControl} from './controls';
 import controllable from 'react-controllables';
 
 
 class DefaultWrapper extends React.Component {
+  static propTypes = {
+    children: PropTypes.node,
+  }
+
   render() {
     return (
       <span style={{display: 'inline-block', position: 'relative'}}>
@@ -19,6 +23,10 @@ export const facade = DecoratorCreator({wrapper: DefaultWrapper})(function(Facad
 
   @controllable(['value'])
   class WrappedControl extends React.Component {
+    static propTypes = {
+      value: PropTypes.string,
+      children: PropTypes.array,
+    }
 
     getLabel(value = this.props.value) {
       if (this.props.children) {
