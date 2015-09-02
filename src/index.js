@@ -35,7 +35,7 @@ export const facade = DecoratorCreator({wrapper: DefaultWrapper})(function(Facad
         ));
         if (child && child.props.children) return child.props.children.toString();
       }
-      return value.toString();
+      return value != null ? value.toString() : null;
     }
 
     getChecked(value = this.props.value) {
