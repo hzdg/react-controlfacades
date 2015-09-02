@@ -24,7 +24,7 @@ export const facade = DecoratorCreator({wrapper: DefaultWrapper})(function(Facad
   @controllable(['value'])
   class WrappedControl extends React.Component {
     static propTypes = {
-      value: PropTypes.string,
+      value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.boolean]),
       children: PropTypes.array,
     }
 
