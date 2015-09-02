@@ -38,11 +38,16 @@ export const facade = DecoratorCreator({wrapper: DefaultWrapper})(function(Facad
       return value.toString();
     }
 
+    getChecked(value = this.props.value) {
+      return !!value;
+    }
+
     renderFacade() {
       // TODO: How to know which props go to facade?
       return (
         <Facade
           {...this.props}
+          checked={this.getChecked()}
           label={this.getLabel()}
         />
       );
