@@ -30,7 +30,9 @@ export const facade = DecoratorCreator({wrapper: DefaultWrapper})(function(Facad
 
     getLabel(value = this.props.value) {
       if (this.props.children) {
-        let child = this.props.children.find(({props}) => props.value.toString() === value);
+        let child = this.props.children.find(({props: childProps}) => (
+          childProps.value === value || childProps.value.toString() === value.toString()
+        ));
         if (child && child.props.children) return child.props.children.toString();
       }
       return value.toString();
