@@ -41,19 +41,11 @@ class MyCheckbox extends React.Component {
 
 The facade will receive the following props:
 
-<table>
-  <tr>
-    <td><code>value</code></td>
-    <td>The value of the control.</td>
-  </tr>
-  <tr>
-    <td><code>label</code></td>
-    <td>
-      For select boxes, the option string that corresponds to the selected
-      value.
-    </td>
-  </tr>
-</table>
+name    | description
+--------|------------
+value   | The value of the control
+label   | For select boxes, the option string that corresponds to the selected value.
+checked | For check boxes, a boolean the corresponds to whether or not the box has been checked
 
 
 [jquery.icbiacontrol]: https://github.com/matthewwithanm/jquery-icbiacontrol
