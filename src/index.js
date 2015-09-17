@@ -32,8 +32,8 @@ export const facade = DecoratorCreator({wrapper: DefaultWrapper})(function(Facad
       let children = this.props.children;
       if (!Array.isArray(children)) children = [children];
 
-      if (children) {
-        let child = children.find(({props: childProps}) => (
+      if (children.length) {
+        let child = children.find(({props: childProps} = {}) => (
           childProps && (childProps.value === value || childProps.value.toString() === value.toString())
         ));
         if (child && child.props.children) return child.props.children.toString();
