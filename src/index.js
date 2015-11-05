@@ -21,11 +21,25 @@ class DefaultWrapper extends React.Component {
 export const facade = DecoratorCreator({wrapper: DefaultWrapper})(function(Facade, options) {
   const {wrapper: Wrapper, control: Control} = options || {};
 
-  @controllable(['value'])
+  @controllable(['value', 'focus'])
   class WrappedControl extends React.Component {
     static propTypes = {
       value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.bool]),
       children: PropTypes.array,
+      focus: PropTypes.bool,
+      autoFocus: PropTypes.bool,
+      onFocusChange: PropTypes.func,
+      onFocus: PropTypes.func,
+      onBlur: PropTypes.func,
+    }
+
+    static defaultProps = {
+      focus: false,
+      autoFocus: false,
+    }
+
+    componentDidMount() {
+      if (this.props.autoFocus) this.props.onFocusChange(true);
     }
 
     getLabel(value = this.props.value) {
@@ -46,6 +60,18 @@ export const facade = DecoratorCreator({wrapper: DefaultWrapper})(function(Facad
       return !!value;
     }
 
+    handleFocus(event) {
+      if (this.props.onFocus) this.props.onFocus(event);
+      if (event.defaultPrevented) return;
+      this.props.onFocusChange(true);
+    }
+
+    handleBlur(event) {
+      if (this.props.onBlur) this.props.onBlur(event);
+      if (event.defaultPrevented) return;
+      this.props.onFocusChange(false);
+    }
+
     renderFacade() {
       // TODO: How to know which props go to facade?
       return (
@@ -59,7 +85,13 @@ export const facade = DecoratorCreator({wrapper: DefaultWrapper})(function(Facad
 
     renderControl() {
       // TODO: How to know which props go to control?
-      return <Control {...this.props} />;
+      return (
+        <Control
+          {...this.props}
+          onFocus={::this.handleFocus}
+          onBlur={::this.handleBlur}
+        />
+      );
     }
 
     render() {
