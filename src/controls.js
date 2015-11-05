@@ -23,6 +23,8 @@ export class CheckboxControl extends React.Component {
     defaultValue: PropTypes.bool,
     value: PropTypes.bool,
     onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
   }
 
   static defaultProps = {
@@ -33,6 +35,14 @@ export class CheckboxControl extends React.Component {
     if (this.props.onChange) this.props.onChange(!!event.currentTarget.checked);
   }
 
+  handleFocus(event) {
+    if (this.props.onFocus) this.props.onFocus(event);
+  }
+
+  handleBlur(event) {
+    if (this.props.onBlur) this.props.onBlur(event);
+  }
+
   render() {
     let props = Object.assign(this.props);
     delete props.checked;
@@ -40,13 +50,15 @@ export class CheckboxControl extends React.Component {
 
     return (
       <input
-          defaultChecked={this.props.defaultValue}
-          checked={this.props.value}
-          style={controlStyles}
-          {...this.props}
-          type="checkbox"
-          onChange={::this.handleChange}
-          />
+        defaultChecked={this.props.defaultValue}
+        checked={this.props.value}
+        style={controlStyles}
+        {...this.props}
+        type="checkbox"
+        onChange={::this.handleChange}
+        onFocus={::this.handleFocus}
+        onBlur={::this.handleBlur}
+      />
     );
   }
 }
@@ -59,15 +71,31 @@ export class SelectControl extends React.Component {
   static propTypes = {
     children: PropTypes.node,
     onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
   }
 
   handleChange(event) {
     if (this.props.onChange) this.props.onChange(event.currentTarget.value);
   }
 
+  handleFocus(event) {
+    if (this.props.onFocus) this.props.onFocus(event);
+  }
+
+  handleBlur(event) {
+    if (this.props.onBlur) this.props.onBlur(event);
+  }
+
   render() {
     return (
-      <select style={controlStyles} {...this.props} onChange={::this.handleChange}>
+      <select
+        style={controlStyles}
+        {...this.props}
+        onChange={::this.handleChange}
+        onFocus={::this.handleFocus}
+        onBlur={::this.handleBlur}
+      >
         {this.props.children}
       </select>
     );
