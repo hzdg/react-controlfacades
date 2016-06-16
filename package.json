@@ -29,7 +29,7 @@
   "scripts": {
     "build": "./node_modules/.bin/babel-node ./node_modules/.bin/gulp build",
     "watch": "./node_modules/.bin/babel-node ./node_modules/.bin/gulp watch",
-    "prepublish": "npm build"
+    "prepublish": "npm run-script build"
   },
   "repository": {
     "type": "git",
